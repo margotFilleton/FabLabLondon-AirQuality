@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
-
-import connexion from './connexion';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+//import connexion from './connexion';
 import './App.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MyAwesomeReactComponent from './Components/TopBar';
 
 class App extends Component {
 
     componentWillMount() {
-
+        injectTapEventPlugin();
     }
 
 
     render() {
-     return(<div></div>);
+     return(
+         <MuiThemeProvider>
+             <MyAwesomeReactComponent />
+         </MuiThemeProvider>
+
+     );
     }
 
 }

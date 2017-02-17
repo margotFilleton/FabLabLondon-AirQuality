@@ -1,17 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
+import AppBar from 'material-ui/AppBar';
 
-
-class bar extends Component {
-
-
-    render() {
-        return (
-            <div >
-
-
-            </div>
-        );
-    }
-}
+const bar = () => (
+    <AppBar
+        title="Air Quality London"
+    />
+);
 
 export default bar;
