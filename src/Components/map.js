@@ -1,50 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import React, { Component } from 'react';
+import './map.css';
 
-const coords = {
-    lat: 51.5258541,
-    lng: -0.08040660000006028
-};
 
-const gmaps = React.createClass({
+class gmaps extends Component {
 
-    onMapCreated(map) {
-        map.setOptions({
-            disableDefaultUI: true
+
+
+
+    componentDidMount() {
+        const {lat, lng} = this.props.initialPosition;
+        this.map = new window.google.maps.Map(this.refs.map, {
+            center: {lat, lng},
+            zoom: 16,
+            mapTypeId: 'terrain'
         });
-    },
 
-    onDragEnd(e) {
-        console.log('onDragEnd', e);
-    },
+      /*  this.marker = new window.google.maps.Marker({
+            position: {lat, lng},
+            map: this.map,
+            title: 'Hello World!'
+        });*/
 
-    onCloseClick() {
-        console.log('onCloseClick');
-    },
 
-    onClick(e) {
-        console.log('onClick', e);
-    },
 
+    }
     render() {
         return (
-            <Gmaps
-                width={'1800px'}
-                height={'600px'}
-                lat={coords.lat}
-                lng={coords.lng}
-                zoom={12}
-                loadingMessage={'Loading'}
-                params={{v: '3.exp', key: 'YOUR_API_KEY'}}
-                onMapCreated={this.onMapCreated}>
-               
-            </Gmaps>
+
+            <div>
+                <div ref= "map" style={{with: 500, height:500}}>
+                </div>
+
+            </div>
         );
     }
 
-});
-
+}
 export default gmaps;
 
 

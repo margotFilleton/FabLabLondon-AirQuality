@@ -15,12 +15,12 @@ class App extends Component {
 
     render() {
      return(
+
          <div>
              <MuiThemeProvider>
                  <Bar />
-
              </MuiThemeProvider>
-             <Map />
+             <Map initialPosition={{ lat: 51.5258541, lng: -0.08040660000006028}} />
          </div>
 
 
