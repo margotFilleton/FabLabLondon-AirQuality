@@ -10,13 +10,13 @@ class gmaps extends Component {
         var latLng = new window.google.maps.LatLng(lat,lng);
         this.heatmapData.push(latLng);
         var color = [];
-        if(value == 1){
+        if(value <=1){
             color = [
                 'rgba(255, 0, 0, 0)',
                 'rgba(255, 0, 0, 1)'
             ];
         }
-        else if( value == 2)
+        else if(value <= 2)
         {
             color = [
                 'rgba(255, 100, 10, 0)',
@@ -35,7 +35,8 @@ class gmaps extends Component {
             dissipating: true,
             map: this.map,
             gradient: color,
-            radius:100
+            radius:100,
+            maxIntensity:0.5
         });
     }
 
@@ -51,13 +52,14 @@ class gmaps extends Component {
         this.addPointToMap(51.5268541,-0.08331660000006028,3);
         this.addPointToMap(51.5268541,-0.08222760000006028,3);
         this.addPointToMap(51.5268541,-0.08113860000006028,3);
+        this.addPointToMap(51.5278541,-0.0820,1);
 
     }
     render() {
         return (
 
             <div>
-                <div ref= "map" style={{with: 500, height:500}}>
+                <div ref="map" style={{with: 500, height:500}}>
                 </div>
 
             </div>
