@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import './map.css';
-
+import firebase from 'firebase';
 
 class gmaps extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dateSelected: [],
+            dataDisplay: []
+        };
+    }
+
+
+    readData (date) {
+        firebase.database().ref('/data/'+date).once('value').then(function(snapshot) {
+            /*this.setState({
+                dataDisplay: snapshot.val()
+            });*/
+           // this.dataDisplay = snapshot.val();
+        });
+    }
 
     addPointToMap(lat,lng,value){
         this.heatmapData = [];
@@ -47,12 +65,17 @@ class gmaps extends Component {
             center: {lat, lng},
             zoom: 16
         });
-        this.addPointToMap(51.5248541,-0.08040660000006028,3);
-        this.addPointToMap(51.5258541,-0.08040660000006028,2);
-        this.addPointToMap(51.5268541,-0.08331660000006028,3);
-        this.addPointToMap(51.5268541,-0.08222760000006028,3);
-        this.addPointToMap(51.5268541,-0.08113860000006028,3);
-        this.addPointToMap(51.5278541,-0.0820,1);
+        this.readData("one");
+
+        if(this.dataDisplay != null) {
+            for (let key in this.dataDisplay) {
+                console.error(this.dataDisplay[key].airQuality);
+                //this.addPointToMap(51.5248541,-0.08040660000006028,3);
+                this.addPointToMap(this.dataDisplay[key].lat,this.dataDisplay[key].lng,3);
+            }
+        }
+      
+
 
     }
     render() {

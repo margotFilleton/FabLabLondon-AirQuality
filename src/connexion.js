@@ -8,9 +8,10 @@ const connexion = {
     userLoggedCallback: null,
 
     //TO DO read data
-    readData: function () {
-        firebase.database().ref('/data/').once('value').then(function(snapshot) {
-            //var listData = snapshot.val().one;
+    readData: function (date) {
+        firebase.database().ref('/data/'+date).once('value').then(function(snapshot) {
+            var listData = snapshot.val();
+            return(listData);
         });
     },
 
