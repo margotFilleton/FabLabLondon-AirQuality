@@ -14,13 +14,14 @@ class gmaps extends Component {
 
 
     readData (date) {
-        firebase.database().ref('/data/'+date).once('value').then(function(snapshot) {
-            /*this.setState({
-                dataDisplay: snapshot.val()
-            });*/
+        firebase.database().ref('/data/'+date).once('value').then(response =>  {
+            this.setState({
+                dataDisplay: response.val()
+            });
            // this.dataDisplay = snapshot.val();
         });
     }
+
 
     addPointToMap(lat,lng,value){
         this.heatmapData = [];
@@ -67,26 +68,25 @@ class gmaps extends Component {
         });
         this.readData("one");
 
-        if(this.dataDisplay != null) {
-            for (let key in this.dataDisplay) {
-                console.error(this.dataDisplay[key].airQuality);
-                //this.addPointToMap(51.5248541,-0.08040660000006028,3);
-                this.addPointToMap(this.dataDisplay[key].lat,this.dataDisplay[key].lng,3);
-            }
-        }
-      
+
+
 
 
     }
     render() {
+        if(this.state.dataDisplay != null) {
+            for (let key in this.state.dataDisplay) {
+                this.addPointToMap(this.state.dataDisplay[key].lat,this.state.dataDisplay[key].lng,3);
+            }
+        }
         return (
 
             <div>
                 <div ref="map" style={{with: 500, height:500}}>
                 </div>
-
             </div>
         );
+
     }
 
 }
